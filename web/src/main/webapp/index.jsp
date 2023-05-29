@@ -15,7 +15,7 @@
   <p>
     This is a very simple example web page on a JSP.
     <h1>
-    Creando un push para crear un build automático en Jenkins todo jungos !!
+    Creando un push para crear un build automático en Jenkins juntos a todos  !!
     </h1>
   </p>
 </body>
