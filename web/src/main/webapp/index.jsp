@@ -18,7 +18,7 @@
     Creando un push para crear un build automático en Jenkins juntos a todos  !!
     </h1>
     <h2>
-    Vamos por el segundo intento Creando un push para crear un build automático en Jenkins juntos a todos  !!
+    Vamos
     </h2>
 
   </p>
