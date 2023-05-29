@@ -20,9 +20,6 @@
     <h2>
     Vamos por el segundo intento Creando un push para crear un build automático en Jenkins juntos a todos  !!
     </h2>
-    <h3>
-    Vamos por el tercer intento Creando un push para crear un build automático en Jenkins juntos a todos  !!
-    </h3>
 
   </p>
 </body>
