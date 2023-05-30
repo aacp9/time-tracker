@@ -18,7 +18,7 @@
     Creando un push para crear un build automático en Jenkins juntos a todos  !!
     </h1>
     <h2>
-    que paso ahora
+    que paso aho
     </h2>
 
   </p>
