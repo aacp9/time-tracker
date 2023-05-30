@@ -19,7 +19,7 @@
     </h1>
     <h2>
     que paso ahora loco dddd
-    que más cambios quierennn
+    que más cambios quieren
     ahora con nano		
 
     </h2>
