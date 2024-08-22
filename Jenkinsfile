@@ -1,44 +1,66 @@
 pipeline {
     agent any
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
+    tools{
         maven "Maven3"
         jdk "Java11"
     }
-
+    
+    environment{
+        FLAG_GREEN ='true'
+        FLAG_RED='false'
+    }
     stages {
-        stage('Build') {
+        stage('Hello') {
             steps {
-                // Get some code from a GitHub repository
-                git branch: 'master', url: 'https://github.com/bellyster/time-tracker.git'
-
-                // Run Maven on a Unix agent.
-                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                bat "mvn clean package -DskipTests"
+                echo "Valor bandera VERDE: ${FLAG_GREEN}"
+                echo "Valor bandera ROJA : ${FLAG_RED}"
+                echo "Ejemplos de variables de entorno"
+                echo "Job Name: ${env.JOB_NAME}"
+                echo "JAVA_HOME Value: ${env.JAVA_HOME}"
+                echo "MAVEN_HOME Value: ${env.MAVEN_HOME}"
             }
-
-            post {
-                // failed, record the artifacts.
-                success {
-                    echo 'Archivando artefacto'
-                    archiveArtifacts 'core/target/*.jar'
-                    archiveArtifacts 'web/target/*.war'
+        }
+        stage('descar_código_Git_Polling'){
+            steps{
+                //Acceso público
+                //git branch: 'main', url:'https://github.com/aacp9/time-tracker.git'
+                
+                //acceso con tunel ssh
+                git branch: 'main', credentialsId: 'jenkins-Github',
+                url: 'git@github.com:aacp9/time-tracker.git'
+                
+            }
+        }
+        stage('Build con Maven'){
+            steps{
+                //para windows
+                //bat "mvn clean package"
+                // ignorar test
+                //bat "mvn clean package -DskipTests"
+                
+                //para Ubuntu e ignora test
+                sh "mvn -Dmaven.test.failure.ignore=true clean package "
+            }
+            post{
+                //los artefactos son war,ear,jar, archivos comprimidos que se utilizan para el despliegue de la aplicación
+                //condicioneles de post
+                //always, chaged, fixed, regression, aborted, failure, success
+                success{
+                    echo 'Archivar Artefactos'
+                    archiveArtifacts "core/target/*.jar"
+                    archiveArtifacts "web/target/*.war"
                 }
             }
         }
-
-        stage('UNIT TESTS'){
-             steps{
-                 //Unix version
-                 //sh: 'mvn test'
-                 //Ejecutar los tests
-                 echo 'Ejecutando Tests'
-                 bat "mvn test"
-                 }
-             }
-
+        stage('Test Maven'){
+            steps{
+                //windows
+                //bat "mvn test"
+                
+                //Ubuntu
+                sh "mvn test"
+            }
+        }
     }
 }
